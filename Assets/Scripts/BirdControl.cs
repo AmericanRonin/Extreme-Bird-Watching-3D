@@ -17,7 +17,11 @@ public class BirdControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(watchMeter.fillAmount > 0)
+        // always face camera
+        //transform.LookAt(Camera.main.transform.position);
+        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
+
+        if (watchMeter.fillAmount > 0)
         {
             watchMeter.fillAmount -= Time.deltaTime * 0.1f;
         }
