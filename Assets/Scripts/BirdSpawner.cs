@@ -22,13 +22,14 @@ public class BirdSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
-        lastBirdSpawn += Time.deltaTime;
-        if (lastBirdSpawn >= birdSpawnTime)
+        if (!scoreController.isGameOver)
         {
-            CreateBird();
+            lastBirdSpawn += Time.deltaTime;
+            if (lastBirdSpawn >= birdSpawnTime)
+            {
+                CreateBird();
+            }
         }
-        
     }
 
     // create a new bird
@@ -59,7 +60,7 @@ public class BirdSpawner : MonoBehaviour
         // create new bird
         GameObject newBird = Instantiate(birdPrefab, startPos, Quaternion.identity);
         // make this the parent so birds are all under same GameObject
-        newBird.transform.parent = this.transform;
+        newBird.transform.SetParent(this.transform);
 
         BirdControl newBirdController = newBird.GetComponent<BirdControl>();
         // give the new bird flight coordinates

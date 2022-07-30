@@ -6,7 +6,7 @@ public class BirdControl : MonoBehaviour
 {
     public UnityEngine.UI.Image watchMeter;
     public ScoreControl scoreController;
-    public float waitTime = 10.0f;
+    public float waitTime = 15.0f;
 
     float birdExistTime = 0.0f;
 
@@ -31,51 +31,54 @@ public class BirdControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // always face camera
-        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
-
-        if (watchMeter.fillAmount > 0)
+        if (!scoreController.isGameOver)
         {
-            watchMeter.fillAmount -= Time.deltaTime * 0.1f;
-        }
+            // always face camera
+            transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
 
-        if (flying)
-        {
-            // flies down
-            if (!leaving)
+            if (watchMeter.fillAmount > 0)
             {
-                timeInFlight += Time.deltaTime / flyingTime;
-                transform.position = Vector3.Lerp(startPos, destPos, timeInFlight);
+                watchMeter.fillAmount -= Time.deltaTime * 0.1f;
+            }
 
-                if (timeInFlight >= 1.0f)
+            if (flying)
+            {
+                // flies down
+                if (!leaving)
                 {
-                    flying = false;
-                    birdExistTime = 0.0f;
+                    timeInFlight += Time.deltaTime / flyingTime;
+                    transform.position = Vector3.Lerp(startPos, destPos, timeInFlight);
+
+                    if (timeInFlight >= 1.0f)
+                    {
+                        flying = false;
+                        birdExistTime = 0.0f;
+                    }
+                }
+                // flies away
+                else
+                {
+                    timeInFlight += Time.deltaTime / flyingTime;
+                    transform.position = Vector3.Lerp(destPos, startPos, timeInFlight);
+
+                    // bird has flown away, so remove
+                    if (timeInFlight >= 1.0f)
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }
-            // flies away
             else
             {
-                timeInFlight += Time.deltaTime / flyingTime;
-                transform.position = Vector3.Lerp(destPos, startPos, timeInFlight);
 
-                // bird has flown away, so remove
-                if (timeInFlight >= 1.0f)
+                birdExistTime += Time.deltaTime;
+
+                if (birdExistTime >= waitTime)
                 {
-                    Destroy(gameObject);
+                    flying = true;
+                    leaving = true;
+                    timeInFlight = 0.0f;
                 }
-            }
-        }
-        else
-        {
-
-            birdExistTime += Time.deltaTime;
-
-            if (birdExistTime >= waitTime)
-            {
-                flying = true;
-                leaving = true;
-                timeInFlight = 0.0f;
             }
         }
     }
