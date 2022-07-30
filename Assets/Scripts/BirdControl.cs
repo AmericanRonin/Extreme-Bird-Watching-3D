@@ -12,10 +12,20 @@ public class BirdControl : MonoBehaviour
 
     bool watched = false;
 
+    float flyingTime = 5.0f;
+    float timeInFlight = 0.0f;
+
+    public Vector3 destPos;
+    public Vector3 startPos;
+
+    bool flying = false;
+    bool leaving = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        birdExistTime = 0.0f;
+        flying = true;
+        leaving = false;
     }
 
     // Update is called once per frame
@@ -29,11 +39,44 @@ public class BirdControl : MonoBehaviour
             watchMeter.fillAmount -= Time.deltaTime * 0.1f;
         }
 
-        birdExistTime += Time.deltaTime;
-
-        if(birdExistTime >= waitTime)
+        if (flying)
         {
-            Destroy(gameObject);
+            // flies down
+            if (!leaving)
+            {
+                timeInFlight += Time.deltaTime / flyingTime;
+                transform.position = Vector3.Lerp(startPos, destPos, timeInFlight);
+
+                if (timeInFlight >= 1.0f)
+                {
+                    flying = false;
+                    birdExistTime = 0.0f;
+                }
+            }
+            // flies away
+            else
+            {
+                timeInFlight += Time.deltaTime / flyingTime;
+                transform.position = Vector3.Lerp(destPos, startPos, timeInFlight);
+
+                // bird has flown away, so remove
+                if (timeInFlight >= 1.0f)
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
+        else
+        {
+
+            birdExistTime += Time.deltaTime;
+
+            if (birdExistTime >= waitTime)
+            {
+                flying = true;
+                leaving = true;
+                timeInFlight = 0.0f;
+            }
         }
     }
 
