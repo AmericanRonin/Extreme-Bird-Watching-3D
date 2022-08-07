@@ -15,6 +15,10 @@ public class ScoreControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+#if UNIT_IOS
+        Application.targetFrameRate = 60;
+#endif
+
         totalScore = 0;
         scoreText.text = "0";
         timerTime = 60.0f;

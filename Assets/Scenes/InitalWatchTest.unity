@@ -259,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bionculars: {fileID: 476913244}
   birds: {fileID: 2007409088}
-  moveSpeed: 1
+  moveSpeed: 0.5
 --- !u!4 &466925509
 Transform:
   m_ObjectHideFlags: 0
@@ -1008,8 +1008,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreController: {fileID: 1307616194}
-  birdPrefab: {fileID: 7017044682041145439, guid: 9fc83d016d2534478b525c4f3e6ed3e2,
-    type: 3}
+  birdPrefab:
+  - {fileID: 1640085561791316489, guid: 5d2889cd8109049ff84cf3533992c71f, type: 3}
+  - {fileID: 7046569700272610470, guid: c355c3e6801c04f85bcdc93d87915e72, type: 3}
 --- !u!1 &2067405148
 GameObject:
   m_ObjectHideFlags: 0

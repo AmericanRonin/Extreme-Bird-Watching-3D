@@ -5,7 +5,7 @@ using UnityEngine;
 public class BirdSpawner : MonoBehaviour
 {
     public ScoreControl scoreController;
-    public GameObject birdPrefab;
+    public GameObject[] birdPrefab;
 
     float spawnDistance = 30.0f;
     float birdSpawnTime = 1.0f;
@@ -58,7 +58,7 @@ public class BirdSpawner : MonoBehaviour
         Vector3 startPos = new Vector3(x, spawnHeight, z);
 
         // create new bird
-        GameObject newBird = Instantiate(birdPrefab, startPos, Quaternion.identity);
+        GameObject newBird = Instantiate(birdPrefab[Random.Range(0,birdPrefab.Length)], startPos, Quaternion.identity);
         // make this the parent so birds are all under same GameObject
         newBird.transform.SetParent(this.transform);
 

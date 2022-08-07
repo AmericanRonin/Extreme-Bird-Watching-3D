@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cb448c33b01f241a8ad65d9cbde52146, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c8b8aac4534d45a9a5220ef99b5e206, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,6 +105,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   watchMeter: {fileID: 7017044682439469837}
   scoreController: {fileID: 0}
+  waitTime: 10
+  destPos: {x: 0, y: 0, z: 0}
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &7017044682103188277
 GameObject:
   m_ObjectHideFlags: 0
