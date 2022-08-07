@@ -7,7 +7,7 @@ public class TouchControl : MonoBehaviour
     public BinocularControl bionculars;
     public GameObject birds;
 
-    public float moveSpeed = 10.0f;
+    public float moveSpeed = 5.0f;
 
     float tapTime = 0.0f;
 
