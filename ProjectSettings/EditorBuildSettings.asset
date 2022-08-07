@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes: []
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ee1ffc30a36d42e40aada0dc88348167,
+      type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 9fdb0b75fb4ca4587b8bca037e241319,
       type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,
+      guid: 750b906b37ce39f409d76bc023c89415, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 61a1360f7caa44537b3d123d268245d9, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: a4a562e9959e91d4382555c301b26545,
+      type: 2}
