@@ -21,6 +21,8 @@ public class BirdControl : MonoBehaviour
     bool flying = false;
     bool leaving = false;
 
+    public float watchIncrement = 0.01f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,7 +90,7 @@ public class BirdControl : MonoBehaviour
         // TODO: should this be checked on what calls CheckIfWatched()?
         if (!watched)
         {
-            watchMeter.fillAmount += 0.1f;
+            watchMeter.fillAmount += watchIncrement;
 
             // check if bird fully watched
             if (watchMeter.fillAmount >= 1)

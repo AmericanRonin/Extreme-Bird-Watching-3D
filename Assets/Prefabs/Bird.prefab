@@ -108,6 +108,7 @@ MonoBehaviour:
   waitTime: 10
   destPos: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
+  watchIncrement: 0.01
 --- !u!1 &7017044682103188277
 GameObject:
   m_ObjectHideFlags: 0

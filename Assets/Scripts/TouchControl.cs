@@ -14,7 +14,11 @@ public class TouchControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // if running in editor, move quicker
+        if(Application.isEditor)
+        {
+            moveSpeed *= 10;
+        }
     }
 
     // Update is called once per frame
@@ -43,7 +47,8 @@ public class TouchControl : MonoBehaviour
             tapTime += Time.deltaTime;
         }
 
-        if(Input.GetMouseButtonUp(0))
+        // removing tag to watch bird
+        /*if(Input.GetMouseButtonUp(0))
         {
             // check if short tap
             if(tapTime < 0.2f)
@@ -63,6 +68,6 @@ public class TouchControl : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
     }
 }
