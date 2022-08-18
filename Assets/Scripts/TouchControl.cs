@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TouchControl : MonoBehaviour
 {
-    public BinocularControl bionculars;
+    public BinocularControl binoculars;
     public GameObject birds;
 
     public float moveSpeed = 5.0f;
@@ -26,9 +26,9 @@ public class TouchControl : MonoBehaviour
     {
         // logic for changing how fast to move camera based on zoom
         float zoomFactor = moveSpeed;
-        if(bionculars.binocularsOn)
+        if(binoculars.binocularsOn)
         {
-            zoomFactor = zoomFactor / bionculars.binocularZoom;
+            zoomFactor = zoomFactor / binoculars.binocularZoom;
         }
 
         // set a timer to check tap length
@@ -37,8 +37,13 @@ public class TouchControl : MonoBehaviour
             tapTime = 0.0f;
         }
 
+        if (Input.GetKeyDown("space"))
+        {
+            binoculars.OnButtonPress();
+        }
+
         // logic to move the camera -- includes zoomFactor for speed
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             Vector3 rotateValue = new Vector3(Input.GetAxis("Mouse Y") * zoomFactor,
                 -Input.GetAxis("Mouse X") * zoomFactor, 0);

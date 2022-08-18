@@ -1,65 +1,47 @@
 {
     "m_SelectedDeviceId": "1WMHHA44E62136",
     "m_SelectedPackage": {
-        "deviceId": "1WMHHA44E62136",
-        "name": "com.NTMSoftware.BirdwatchingExtreme3D",
-        "processId": 20370,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "1WMHHA44E62136",
-            "name": "com.DefaultCompany.BirdwatchingExtreme3D",
-            "processId": 14049,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA44E62136",
-            "name": "com.NTMSoftware.BirdwatchingExtreme3D",
-            "processId": 14856,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA44E62136",
-            "name": "com.NTMSoftware.BirdwatchingExtreme3D",
-            "processId": 22569,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA44E62136",
-            "name": "com.NTMSoftware.BirdwatchingExtreme3D",
-            "processId": 16927,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA44E62136",
-            "name": "com.NTMSoftware.BirdwatchingExtreme3D",
-            "processId": 17868,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA44E62136",
-            "name": "com.NTMSoftware.BirdwatchingExtreme3D",
-            "processId": 18466,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA44E62136",
             "name": "com.NTMSoftware.BirdwatchingExtreme3D",
             "processId": 19490,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "1WMHHA44E62136",
             "name": "com.NTMSoftware.BirdwatchingExtreme3D",
             "processId": 19881,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "1WMHHA44E62136",
             "name": "com.NTMSoftware.BirdwatchingExtreme3D",
             "processId": 20370,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA44E62136",
+            "name": "com.NTMSoftware.BirdwatchingExtreme3D",
+            "processId": 13941,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA44E62136",
+            "name": "com.oculus.shellenv",
+            "processId": 2360,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA44E62136",
+            "name": "com.NTMSoftware.BirdwatchingExtreme3D",
+            "processId": 14769,
             "exited": false
         }
     ],

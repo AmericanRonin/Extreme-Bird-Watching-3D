@@ -10,6 +10,11 @@ public class BinocularControl : MonoBehaviour
     public GameObject binocularPanel;
     public GameObject birds;
 
+    public GameObject headGear = null;
+    public GameObject rightController = null;
+    
+    public float binocularsDist = 0.16f;
+
     float watchingTimer = 0.0f;
 
     // Start is called before the first frame update
@@ -23,6 +28,25 @@ public class BinocularControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // TODO: If VR
+        if(headGear != null && rightController != null)
+        {
+            // if right controller close enough, put binoculars on
+            // TODO: make sure position right
+            if(Vector3.Distance(headGear.transform.position, rightController.transform.position) < binocularsDist)
+            {
+                binocularsOn = true;
+                binocularPanel.SetActive(true);
+                Camera.main.fieldOfView = normalScale / binocularZoom;
+            }
+            else
+            {
+                binocularsOn = false;
+                Camera.main.fieldOfView = normalScale;
+                binocularPanel.SetActive(false);
+            }
+        }
+
         // while binoculars are on, see if birds are in view
         if (binocularsOn)
         {
