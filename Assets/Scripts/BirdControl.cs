@@ -87,22 +87,25 @@ public class BirdControl : MonoBehaviour
 
     public void CheckIfWatched()
     {
-        // TODO: should this be checked on what calls CheckIfWatched()?
-        if (!watched)
+        if (!scoreController.isGameOver)
         {
-            watchMeter.fillAmount += watchIncrement;
-
-            // check if bird fully watched
-            if (watchMeter.fillAmount >= 1)
+            // TODO: should this be checked on what calls CheckIfWatched()?
+            if (!watched)
             {
-                watched = true;
+                watchMeter.fillAmount += watchIncrement;
 
-                scoreController.AddToScore(1);
+                // check if bird fully watched
+                if (watchMeter.fillAmount >= 1)
+                {
+                    watched = true;
 
-                // make bird translucent and disappear watch meter
-                watchMeter.gameObject.SetActive(false);
-                SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-                sprite.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                    scoreController.AddToScore(1);
+
+                    // make bird translucent and disappear watch meter
+                    watchMeter.gameObject.SetActive(false);
+                    SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+                    sprite.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                }
             }
         }
     }

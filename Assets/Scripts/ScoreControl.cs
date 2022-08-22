@@ -51,7 +51,10 @@ public class ScoreControl : MonoBehaviour
 
     public void AddToScore(int num)
     {
-        totalScore += num;
-        scoreText.text = totalScore.ToString();
+        if (!isGameOver)
+        {
+            totalScore += num;
+            scoreText.text = totalScore.ToString();
+        }
     }
 }

@@ -391,9 +391,10 @@ MonoBehaviour:
   normalScale: 60
   binocularZoom: 8.5
   binocularPanel: {fileID: 749215595}
-  birds: {fileID: 0}
+  birds: {fileID: 2007409088}
   headGear: {fileID: 963194225}
   rightController: {fileID: 914658107}
+  wholeRig: {fileID: 1512497690}
   binocularsDist: 0.16
 --- !u!4 &476913245
 Transform:
@@ -1417,6 +1418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XRControllerRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 7655812912622807707, guid: 1f4d373a613d0466fbd8849470265852,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f4d373a613d0466fbd8849470265852, type: 3}

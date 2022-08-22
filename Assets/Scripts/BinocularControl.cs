@@ -12,10 +12,13 @@ public class BinocularControl : MonoBehaviour
 
     public GameObject headGear = null;
     public GameObject rightController = null;
+    public GameObject wholeRig = null;
     
     public float binocularsDist = 0.16f;
 
     float watchingTimer = 0.0f;
+
+    Vector3 originalLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -35,21 +38,51 @@ public class BinocularControl : MonoBehaviour
             // TODO: make sure position right
             if(Vector3.Distance(headGear.transform.position, rightController.transform.position) < binocularsDist)
             {
-                binocularsOn = true;
-                binocularPanel.SetActive(true);
-                Camera.main.fieldOfView = normalScale / binocularZoom;
+                if(!binocularsOn)
+                {
+                    originalLocation = wholeRig.transform.position;
+                    watchingTimer = 0.0f;
+
+                    // make right controller invisible
+                    foreach (Renderer r in rightController.GetComponentsInChildren<Renderer>())
+                    {
+                        r.enabled = false;
+                    }
+
+                    binocularsOn = true;
+                    binocularPanel.SetActive(true);
+                }
             }
             else
             {
-                binocularsOn = false;
-                Camera.main.fieldOfView = normalScale;
-                binocularPanel.SetActive(false);
+                if (binocularsOn)
+                {
+                    binocularsOn = false;
+                    binocularPanel.SetActive(false);
+                    wholeRig.transform.position = originalLocation;
+
+                    // make right controller visible again
+                    foreach (Renderer r in rightController.GetComponentsInChildren<Renderer>())
+                    {
+                        r.enabled = true;
+                    }
+                }
             }
         }
 
         // while binoculars are on, see if birds are in view
         if (binocularsOn)
         {
+            if(wholeRig != null)
+            {
+                // for VR, moveforward as if zoom in direction headgear is facing
+                wholeRig.transform.position = originalLocation + (headGear.transform.forward) * 20; // TODO: should be based on bird distance and zoom factor 
+                if(wholeRig.transform.position.y <= -1)
+                {
+                    wholeRig.transform.position = new Vector3(wholeRig.transform.position.x, -0.9f, wholeRig.transform.position.z);
+                }
+            }
+
             watchingTimer += Time.deltaTime;
 
             // only check watch on certain interval
