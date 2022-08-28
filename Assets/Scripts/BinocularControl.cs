@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class BinocularControl : MonoBehaviour
 {
     public bool binocularsOn = false;
     public float normalScale = 60.0f;
     public float binocularZoom = 20.0f;
-    public GameObject binocularPanel;
+    public GameObject binocularPanel = null;
     public GameObject birds;
 
     public GameObject headGear = null;
     public GameObject rightController = null;
     public GameObject wholeRig = null;
-    
+
+    public GameObject vignette = null;
+
     public float binocularsDist = 0.16f;
 
     float watchingTimer = 0.0f;
@@ -25,7 +28,15 @@ public class BinocularControl : MonoBehaviour
     {
         binocularsOn = false;
         Camera.main.orthographicSize = normalScale;
-        binocularPanel.SetActive(false);
+        if (binocularPanel)
+        {
+            binocularPanel.SetActive(false);
+        }
+
+        if (vignette != null)
+        {
+            vignette.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -50,7 +61,11 @@ public class BinocularControl : MonoBehaviour
                     }
 
                     binocularsOn = true;
-                    binocularPanel.SetActive(true);
+
+                    if(vignette != null)
+                    {
+                        vignette.SetActive(true);
+                    }
                 }
             }
             else
@@ -58,13 +73,17 @@ public class BinocularControl : MonoBehaviour
                 if (binocularsOn)
                 {
                     binocularsOn = false;
-                    binocularPanel.SetActive(false);
                     wholeRig.transform.position = originalLocation;
 
                     // make right controller visible again
                     foreach (Renderer r in rightController.GetComponentsInChildren<Renderer>())
                     {
                         r.enabled = true;
+                    }
+
+                    if (vignette != null)
+                    {
+                        vignette.SetActive(false);
                     }
                 }
             }
@@ -110,12 +129,18 @@ public class BinocularControl : MonoBehaviour
         {
             binocularsOn = false;
             Camera.main.fieldOfView = normalScale;
-            binocularPanel.SetActive(false);
+            if (binocularPanel)
+            {
+                binocularPanel.SetActive(false);
+            }
         }
         else
         {
             binocularsOn = true;
-            binocularPanel.SetActive(true);
+            if (binocularPanel)
+            {
+                binocularPanel.SetActive(true);
+            }
             Camera.main.fieldOfView = normalScale / binocularZoom;
             watchingTimer = 0.0f;
         }
