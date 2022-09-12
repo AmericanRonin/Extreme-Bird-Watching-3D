@@ -11,11 +11,15 @@ public class BirdSpawner : MonoBehaviour
     float birdSpawnTime = 1.0f;
     float lastBirdSpawn = 0.0f;
     float spawnHeight = 50.0f;
-    float spawnVariance = 10.0f;
+    float spawnVariance = 20.0f;
+
+    GameObject spawnerHelper;
 
     // Start is called before the first frame update
     void Start()
     {
+        spawnerHelper = new GameObject("Spawner Helper");
+
         CreateBird();
     }
 
@@ -35,19 +39,16 @@ public class BirdSpawner : MonoBehaviour
     // create a new bird
     void CreateBird()
     {
-        // for now, make random x z where it adds to spawnDistance;
-        float x = Random.Range(0.0f, spawnDistance);
-        float z = spawnDistance - x;
+        spawnerHelper.transform.position = Vector3.zero;
 
-        // get random signs for them
-        if(Random.value > 0.5) // 50/50 chance
-        {
-            x = x * -1;
-        }
-        if(Random.value > 0.5)
-        {
-            z = z * -1;
-        }
+        // rotate spawnHelper randomly on y
+        spawnerHelper.transform.RotateAround(transform.position, transform.up, Random.Range(0.0f, 360.0f));
+
+        // move forward random distance
+        spawnerHelper.transform.position += spawnerHelper.transform.forward * (Random.Range(25.0f, 35.0f));
+
+        float x = spawnerHelper.transform.position.x;
+        float z = spawnerHelper.transform.position.z;
 
         Vector3 destPos = new Vector3(x, 0, z);
 
