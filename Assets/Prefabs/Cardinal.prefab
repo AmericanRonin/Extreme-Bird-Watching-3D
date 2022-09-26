@@ -112,6 +112,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7017044682041145436, guid: 9fc83d016d2534478b525c4f3e6ed3e2,
+        type: 3}
+      propertyPath: birdFlyingSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a9a944b9eab5b429e95853914543e3e2,
+        type: 3}
+    - target: {fileID: 7017044682041145436, guid: 9fc83d016d2534478b525c4f3e6ed3e2,
+        type: 3}
+      propertyPath: birdPerchedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 021233f7e9aa04c0ca34613b8841526a,
+        type: 3}
     - target: {fileID: 7017044682041145438, guid: 9fc83d016d2534478b525c4f3e6ed3e2,
         type: 3}
       propertyPath: m_Sprite

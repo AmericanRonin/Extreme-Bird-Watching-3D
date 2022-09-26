@@ -8,6 +8,9 @@ public class BirdControl : MonoBehaviour
     public ScoreControl scoreController;
     public float waitTime = 15.0f;
 
+    public Sprite birdPerchedSprite;
+    public Sprite birdFlyingSprite = null;
+
     float birdExistTime = 0.0f;
 
     bool watched = false;
@@ -28,6 +31,11 @@ public class BirdControl : MonoBehaviour
     {
         flying = true;
         leaving = false;
+
+        if (birdFlyingSprite != null)
+        {
+            GetComponent<SpriteRenderer>().sprite = birdFlyingSprite;
+        }
     }
 
     // Update is called once per frame
@@ -45,6 +53,8 @@ public class BirdControl : MonoBehaviour
 
             if (flying)
             {
+                // TODO: make sure flying bird faces correct direction
+
                 // flies down
                 if (!leaving)
                 {
@@ -54,6 +64,9 @@ public class BirdControl : MonoBehaviour
                     if (timeInFlight >= 1.0f)
                     {
                         flying = false;
+
+                        GetComponent<SpriteRenderer>().sprite = birdPerchedSprite;
+
                         birdExistTime = 0.0f;
                     }
                 }
@@ -78,6 +91,10 @@ public class BirdControl : MonoBehaviour
                 if (birdExistTime >= waitTime)
                 {
                     flying = true;
+                    if(birdFlyingSprite != null)
+                    {
+                        GetComponent<SpriteRenderer>().sprite = birdFlyingSprite;
+                    }
                     leaving = true;
                     timeInFlight = 0.0f;
                 }

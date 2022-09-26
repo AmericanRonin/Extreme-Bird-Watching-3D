@@ -112,10 +112,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7017044682041145436, guid: 9fc83d016d2534478b525c4f3e6ed3e2,
+        type: 3}
+      propertyPath: birdPerchedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1c8b8aac4534d45a9a5220ef99b5e206,
+        type: 3}
     - target: {fileID: 7017044682041145439, guid: 9fc83d016d2534478b525c4f3e6ed3e2,
         type: 3}
       propertyPath: m_Name
-      value: Bird
+      value: Golden-Cheeked Warbler
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fc83d016d2534478b525c4f3e6ed3e2, type: 3}
