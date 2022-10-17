@@ -6,6 +6,7 @@ public class BirdSpawner : MonoBehaviour
 {
     public ScoreControl scoreController;
     public GameObject[] birdPrefab;
+    public TreePlacement treeParent;
 
     float spawnDistance = 30.0f;
     float birdSpawnTime = 1.0f;
@@ -20,7 +21,8 @@ public class BirdSpawner : MonoBehaviour
     {
         spawnerHelper = new GameObject("Spawner Helper");
 
-        CreateBird();
+        //CreateBird(); first bird must be after tree creation
+        lastBirdSpawn = 1.0f;
     }
 
     // Update is called once per frame
@@ -39,37 +41,56 @@ public class BirdSpawner : MonoBehaviour
     // create a new bird
     void CreateBird()
     {
-        spawnerHelper.transform.position = Vector3.zero;
+        
+        if (treeParent.treeList.Count > 0)
+        {
+            // get a random tree
+            TreeGeneration tree = treeParent.treeList[Random.Range(0, treeParent.treeList.Count)].GetComponent<TreeGeneration>();
 
-        // rotate spawnHelper randomly on y
-        spawnerHelper.transform.RotateAround(transform.position, transform.up, Random.Range(0.0f, 360.0f));
+            if (tree.leafPlacementList.Count > 0)
+            {
+                // get random leaf segment from tree and get world position
+                Vector3 destPos = tree.transform.TransformPoint(tree.leafPlacementList[Random.Range(0, tree.leafPlacementList.Count)]);
 
-        // move forward random distance
-        spawnerHelper.transform.position += spawnerHelper.transform.forward * (Random.Range(25.0f, 35.0f));
+                // mode slightly in front of leafs
+                //destPos = Vector3.MoveTowards(destPos, new Vector3(0, destPos.y, 0), 1.0f);
 
-        float x = spawnerHelper.transform.position.x;
-        float z = spawnerHelper.transform.position.z;
+                /*spawnerHelper.transform.position = Vector3.zero;
 
-        Vector3 destPos = new Vector3(x, 0, z);
+                // rotate spawnHelper randomly on y
+                spawnerHelper.transform.RotateAround(transform.position, transform.up, Random.Range(0.0f, 360.0f));
 
-        // get random starting point
-        x += Random.Range(-spawnVariance, spawnVariance);
-        z += Random.Range(-spawnVariance, spawnVariance);
+                // move forward random distance
+                spawnerHelper.transform.position += spawnerHelper.transform.forward * (Random.Range(25.0f, 35.0f));
 
-        Vector3 startPos = new Vector3(x, spawnHeight, z);
+                float x = spawnerHelper.transform.position.x;
+                float z = spawnerHelper.transform.position.z;
 
-        // create new bird
-        GameObject newBird = Instantiate(birdPrefab[Random.Range(0,birdPrefab.Length)], startPos, Quaternion.identity);
-        // make this the parent so birds are all under same GameObject
-        newBird.transform.SetParent(this.transform);
+                Vector3 destPos = new Vector3(x, 0, z);*/
 
-        BirdControl newBirdController = newBird.GetComponent<BirdControl>();
-        // give the new bird flight coordinates
-        newBirdController.destPos = destPos;
-        newBirdController.startPos = startPos;
-        // connect bird to score controller
-        newBirdController.scoreController = scoreController;
+                float x = destPos.x;
+                float z = destPos.z;
 
-        lastBirdSpawn = 0.0f;
+                // get random starting point
+                x += Random.Range(-spawnVariance, spawnVariance);
+                z += Random.Range(-spawnVariance, spawnVariance);
+
+                Vector3 startPos = new Vector3(x, spawnHeight, z);
+
+                // create new bird
+                GameObject newBird = Instantiate(birdPrefab[Random.Range(0, birdPrefab.Length)], startPos, Quaternion.identity);
+                // make this the parent so birds are all under same GameObject
+                newBird.transform.SetParent(this.transform);
+
+                BirdControl newBirdController = newBird.GetComponent<BirdControl>();
+                // give the new bird flight coordinates
+                newBirdController.destPos = destPos;
+                newBirdController.startPos = startPos;
+                // connect bird to score controller
+                newBirdController.scoreController = scoreController;
+
+                lastBirdSpawn = 0.0f;
+            }
+        }
     }
 }

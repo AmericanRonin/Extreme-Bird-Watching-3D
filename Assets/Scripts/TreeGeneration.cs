@@ -15,6 +15,10 @@ public class TreeGeneration : MonoBehaviour
     public Sprite thinBranchBoth;
     public Sprite treeLeaves;
 
+    public List<Vector3> leafPlacementList;
+
+    private int totalSmallSegments = 0;
+
     enum BranchDirection { Up, Right, Left };
 
     // Start is called before the first frame update
@@ -142,7 +146,8 @@ public class TreeGeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // always face camera
+        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
     }
 
     void addThinSegments(Vector3 nextLocale, BranchDirection direction)
@@ -168,6 +173,7 @@ public class TreeGeneration : MonoBehaviour
                     nextLocale = adjustForDirection(newTrunk, direction, nextLocale);
                     
                     thinSegmentCount++;
+                    totalSmallSegments++;
                     break;
 
                 case 1:
@@ -180,9 +186,10 @@ public class TreeGeneration : MonoBehaviour
                         newTrunk.transform.localPosition = nextLocale;
 
                         thinSegmentCount++;
+                        totalSmallSegments++;
 
                         // if up branch right
-                        if(direction == BranchDirection.Up)
+                        if (direction == BranchDirection.Up)
                         {
                             addThinSegments(new Vector3(nextLocale.x + 1, nextLocale.y, nextLocale.z), BranchDirection.Right);
                         }
@@ -206,6 +213,7 @@ public class TreeGeneration : MonoBehaviour
                         newTrunk.transform.localPosition = nextLocale;
 
                         thinSegmentCount++;
+                        totalSmallSegments++;
 
                         // if up branch left
                         if (direction == BranchDirection.Up)
@@ -232,6 +240,7 @@ public class TreeGeneration : MonoBehaviour
                         newTrunk.transform.localPosition = nextLocale;
 
                         thinSegmentCount++;
+                        totalSmallSegments++;
 
                         // branch for both directions
 
@@ -249,11 +258,13 @@ public class TreeGeneration : MonoBehaviour
                     newTrunk.transform.SetParent(this.transform);
                     newTrunk.transform.localPosition = nextLocale;
 
+                    leafPlacementList.Add(nextLocale);
+
                     endThin = true;
                     break;
             }
 
-        } while (!endThin);
+        } while (!endThin && totalSmallSegments < 100); // TODO: make better cutoff
     }
 
     Vector3 adjustForDirection(GameObject segment, BranchDirection direction, Vector3 nextLocale)
