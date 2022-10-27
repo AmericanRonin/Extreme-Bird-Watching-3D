@@ -43,8 +43,11 @@ public class BirdControl : MonoBehaviour
     {
         if (!scoreController.isGameOver)
         {
-            // always face camera
-            transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
+            // always face camera; only update while moving
+            if (flying)
+            {
+                transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
+            }
 
             if (watchMeter.fillAmount > 0)
             {

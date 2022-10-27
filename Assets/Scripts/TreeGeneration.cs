@@ -141,13 +141,15 @@ public class TreeGeneration : MonoBehaviour
             }
 
         } while (!endThick);
+
+        // make it face the camera
+        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // always face camera
-        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
+       
     }
 
     void addThinSegments(Vector3 nextLocale, BranchDirection direction)

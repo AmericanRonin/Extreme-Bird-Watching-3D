@@ -374,6 +374,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6155449359400269907, guid: 3e0bb1219870c4d58a669f709e7ab6ce,
         type: 3}
+      propertyPath: treeParent
+      value: 
+      objectReference: {fileID: 805949237}
+    - target: {fileID: 6155449359400269907, guid: 3e0bb1219870c4d58a669f709e7ab6ce,
+        type: 3}
       propertyPath: scoreController
       value: 
       objectReference: {fileID: 1307616194}
@@ -469,6 +474,7 @@ MonoBehaviour:
   headGear: {fileID: 0}
   rightController: {fileID: 0}
   wholeRig: {fileID: 0}
+  vignette: {fileID: 0}
   binocularsDist: 0.16
 --- !u!4 &476913245
 Transform:
@@ -924,6 +930,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785968749}
   m_CullTransparentMesh: 1
+--- !u!1 &805949236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 805949238}
+  - component: {fileID: 805949237}
+  m_Layer: 0
+  m_Name: Trees
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &805949237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805949236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f981b1817f822384aa4f8e045109c858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numTrees: 40
+  treePrefab: {fileID: 7462881147054568052, guid: 40abf9db95e071c408e4f02095bc59bd,
+    type: 3}
+  treeList: []
+--- !u!4 &805949238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805949236}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &933590414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,7 +1069,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933590414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
