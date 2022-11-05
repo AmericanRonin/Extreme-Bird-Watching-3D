@@ -17,11 +17,16 @@ public class BinocularControl : MonoBehaviour
 
     public GameObject vignette = null;
 
+    public GameObject zoomPanel = null;
+    public Camera zoomCamera = null;
+
     public float binocularsDist = 0.16f;
 
     float watchingTimer = 0.0f;
 
     Vector3 originalLocation;
+
+    bool vrTestBinocularOverride = false;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +42,11 @@ public class BinocularControl : MonoBehaviour
         {
             vignette.SetActive(false);
         }
+
+        if(zoomPanel)
+        {
+            zoomPanel.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -47,7 +57,7 @@ public class BinocularControl : MonoBehaviour
         {
             // if right controller close enough, put binoculars on
             // TODO: make sure position right
-            if(Vector3.Distance(headGear.transform.position, rightController.transform.position) < binocularsDist)
+            if(Vector3.Distance(headGear.transform.position, rightController.transform.position) < binocularsDist || vrTestBinocularOverride)
             {
                 if(!binocularsOn)
                 {
@@ -66,6 +76,9 @@ public class BinocularControl : MonoBehaviour
                     {
                         vignette.SetActive(true);
                     }
+
+                    // make zoom panel visible
+                    zoomPanel.SetActive(true);
                 }
             }
             else
@@ -85,6 +98,8 @@ public class BinocularControl : MonoBehaviour
                     {
                         vignette.SetActive(false);
                     }
+
+                    zoomPanel.SetActive(false);
                 }
             }
         }
@@ -95,11 +110,11 @@ public class BinocularControl : MonoBehaviour
             if(wholeRig != null)
             {
                 // for VR, moveforward as if zoom in direction headgear is facing
-                wholeRig.transform.position = originalLocation + (headGear.transform.forward) * 20; // TODO: should be based on bird distance and zoom factor 
+                /*wholeRig.transform.position = originalLocation + (headGear.transform.forward) * 20; // TODO: should be based on bird distance and zoom factor 
                 if(wholeRig.transform.position.y <= -1)
                 {
                     wholeRig.transform.position = new Vector3(wholeRig.transform.position.x, -0.9f, wholeRig.transform.position.z);
-                }
+                }*/
             }
 
             watchingTimer += Time.deltaTime;
@@ -110,13 +125,36 @@ public class BinocularControl : MonoBehaviour
                 watchingTimer = 0.0f;
 
                 // go through birds and see if watched
-                foreach (Transform child in birds.transform)
+
+                // check on zoom camera for VR using frustrum planes
+                if (zoomCamera != null)
                 {
-                    // check that bird is visible
-                    if (child.GetComponent<Renderer>().isVisible)
+                    Plane[] planes = GeometryUtility.CalculateFrustumPlanes(zoomCamera);
+
+                    foreach (Transform child in birds.transform)
                     {
-                        // do watch logic
-                        child.GetComponent<BirdControl>().CheckIfWatched();
+                        if (child.GetComponent<Renderer>().isVisible)
+                        {
+                            Collider2D birdCollider = child.GetComponent<Collider2D>();
+                            if (GeometryUtility.TestPlanesAABB(planes, birdCollider.bounds))
+                            {
+                                // do watch logic
+                                child.GetComponent<BirdControl>().CheckIfWatched();
+                            }
+                        }
+                    }
+                }
+                // else simply check visibility
+                else
+                {
+                    foreach (Transform child in birds.transform)
+                    {
+                        // check that bird is visible
+                        if (child.GetComponent<Renderer>().isVisible)
+                        {
+                            // do watch logic
+                            child.GetComponent<BirdControl>().CheckIfWatched();
+                        }
                     }
                 }
             }
@@ -127,22 +165,36 @@ public class BinocularControl : MonoBehaviour
     {
         if(binocularsOn)
         {
-            binocularsOn = false;
-            Camera.main.fieldOfView = normalScale;
-            if (binocularPanel)
+            if (headGear != null)
             {
-                binocularPanel.SetActive(false);
+                vrTestBinocularOverride = false;
+            }
+            else
+            {
+                binocularsOn = false;
+                Camera.main.fieldOfView = normalScale;
+                if (binocularPanel)
+                {
+                    binocularPanel.SetActive(false);
+                }
             }
         }
         else
         {
-            binocularsOn = true;
-            if (binocularPanel)
+            if (headGear != null)
             {
-                binocularPanel.SetActive(true);
+                vrTestBinocularOverride = true;
             }
-            Camera.main.fieldOfView = normalScale / binocularZoom;
-            watchingTimer = 0.0f;
+            else
+            {
+                binocularsOn = true;
+                if (binocularPanel)
+                {
+                    binocularPanel.SetActive(true);
+                }
+                Camera.main.fieldOfView = normalScale / binocularZoom;
+                watchingTimer = 0.0f;
+            }
         }
     }
 }
