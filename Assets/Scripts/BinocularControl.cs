@@ -17,7 +17,8 @@ public class BinocularControl : MonoBehaviour
 
     public GameObject vignette = null;
 
-    public GameObject zoomPanel = null;
+    public GameObject zoomPanelLeft = null;
+    public GameObject zoomPanelRight = null;
     public Camera zoomCamera = null;
 
     public float binocularsDist = 0.16f;
@@ -43,9 +44,10 @@ public class BinocularControl : MonoBehaviour
             vignette.SetActive(false);
         }
 
-        if(zoomPanel)
+        if(zoomPanelLeft)
         {
-            zoomPanel.SetActive(false);
+            zoomPanelLeft.SetActive(false);
+            zoomPanelRight.SetActive(false);
         }
     }
 
@@ -78,7 +80,8 @@ public class BinocularControl : MonoBehaviour
                     }
 
                     // make zoom panel visible
-                    zoomPanel.SetActive(true);
+                    zoomPanelLeft.SetActive(true);
+                    zoomPanelRight.SetActive(true);
                 }
             }
             else
@@ -99,7 +102,8 @@ public class BinocularControl : MonoBehaviour
                         vignette.SetActive(false);
                     }
 
-                    zoomPanel.SetActive(false);
+                    zoomPanelLeft.SetActive(false);
+                    zoomPanelRight.SetActive(false);
                 }
             }
         }
