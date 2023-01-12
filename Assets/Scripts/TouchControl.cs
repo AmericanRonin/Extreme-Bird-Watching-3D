@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.XR;
 
 public class TouchControl : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class TouchControl : MonoBehaviour
     public float moveSpeed = 5.0f;
 
     float tapTime = 0.0f;
+
+    private InputDevice rightController;
+    private bool gotRightController = false;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +55,29 @@ public class TouchControl : MonoBehaviour
             Camera.main.transform.eulerAngles = Camera.main.transform.eulerAngles + rotateValue;
 
             tapTime += Time.deltaTime;
+        }
+
+        if (!gotRightController)
+        {
+            List<InputDevice> devices = new List<InputDevice>();
+
+            InputDeviceCharacteristics rightControllerCharacteristics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
+            InputDevices.GetDevicesWithCharacteristics(rightControllerCharacteristics, devices);
+
+            if (devices.Count > 0)
+            {
+                rightController = devices[0];
+                gotRightController = true;
+            }
+        }
+        else
+        {
+            rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue);
+            if (primaryButtonValue == true)
+            {
+                Debug.Log("Primary button pressed");
+                SceneManager.LoadScene(0);
+            }
         }
 
         // removing tag to watch bird

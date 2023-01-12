@@ -1,0 +1,57 @@
+{
+    "name": "VR Controller Right",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "a0982d69-be57-4e14-8059-4bc157190fe9",
+            "actions": [
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "8ec5412e-7063-4661-9d6e-0c285c40b819",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1fcbaa48-5e58-43af-9ac9-8934a623a65e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad1c5cc6-ef99-4f2c-97dd-c0389f30b35f",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "Oculus Control Scheme Right",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Oculus Control Scheme Right",
+            "bindingGroup": "Oculus Control Scheme Right",
+            "devices": [
+                {
+                    "devicePath": "<OculusTouchController>{RightHand}",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

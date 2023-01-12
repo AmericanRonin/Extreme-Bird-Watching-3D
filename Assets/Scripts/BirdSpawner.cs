@@ -8,7 +8,7 @@ public class BirdSpawner : MonoBehaviour
     public GameObject[] birdPrefab;
     public TreePlacement treeParent;
 
-    float spawnDistance = 30.0f;
+    //float spawnDistance = 30.0f;
     float birdSpawnTime = 1.0f;
     float lastBirdSpawn = 0.0f;
     float spawnHeight = 50.0f;

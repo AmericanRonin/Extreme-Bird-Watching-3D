@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/InitalWatchTest_VR_General.unity
+    guid: 4f688974523b162428e6c487c6999861
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ee1ffc30a36d42e40aada0dc88348167,
       type: 2}
@@ -14,6 +17,8 @@ EditorBuildSettings:
       guid: 750b906b37ce39f409d76bc023c89415, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 61a1360f7caa44537b3d123d268245d9, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 2031c98d0646ef64eabfd78deae8fb96,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: a4a562e9959e91d4382555c301b26545,
       type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: ef43bb571ffa9d34194aaa13140e29a6,
